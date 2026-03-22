@@ -15,6 +15,6 @@ public class Student: User
     //methods
     public override string ToString()
     {
-        return $" Identifier - {Identifier} \n Name and surname - {FirstName} {LastName} \n Year of study - {YearOfStudy} \n";
+        return base.ToString() + $" Year of study - {YearOfStudy} \n";
     }
 }

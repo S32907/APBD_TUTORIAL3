@@ -29,7 +29,7 @@ public class Teacher : User
     //methods
     public override string ToString()
     {
-        return $" Identifier - {Identifier} \n Name and surname - {FirstName} {LastName} \n Popularity rating - {PopularityRating} \n";
+        return base.ToString() +  $" Popularity rating - {PopularityRating} \n";
     }
     
 }

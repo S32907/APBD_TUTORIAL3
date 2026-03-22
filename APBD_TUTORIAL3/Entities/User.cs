@@ -18,4 +18,10 @@ public abstract class User
         LastName = lastName;
         Type = type;
     }
+    
+    //methods
+    public override string ToString()
+    {
+        return $" Identifier - {Identifier} \n Name and surname - {FirstName} {LastName} \n Type - {Type} \n";
+    }
 }
