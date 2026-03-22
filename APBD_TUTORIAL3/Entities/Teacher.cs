@@ -26,4 +26,10 @@ public class Teacher : User
         PopularityRating = popularityRating;
     }
     
+    //methods
+    public override string ToString()
+    {
+        return $" Identifier - {Identifier} \n Name and surname - {FirstName} {LastName} \n Popularity rating - {PopularityRating} \n";
+    }
+    
 }

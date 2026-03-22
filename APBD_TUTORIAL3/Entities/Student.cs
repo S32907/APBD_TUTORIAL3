@@ -11,4 +11,10 @@ public class Student: User
     {
         YearOfStudy = yearOfStudy;
     }
+    
+    //methods
+    public override string ToString()
+    {
+        return $" Identifier - {Identifier} \n Name and surname - {FirstName} {LastName} \n Year of study - {YearOfStudy} \n";
+    }
 }
