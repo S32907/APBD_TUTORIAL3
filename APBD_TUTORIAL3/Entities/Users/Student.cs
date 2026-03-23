@@ -4,6 +4,7 @@ public class Student: User
 {
     //properties
     public int YearOfStudy {get; set;}
+    public static int MaxNumberOfEquipment { get; set; } = 2;
     
     //constructor
     public Student(int userId, string firstName,

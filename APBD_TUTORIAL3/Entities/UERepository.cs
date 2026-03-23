@@ -16,7 +16,7 @@ public class UERepository
         Equipments.Add(equipment);
     }
 
-    public User GetUser(int id)
+    public User? GetUser(int id)
     {
         for (int i = 0; i < Users.Count; i++)
         {
@@ -25,10 +25,10 @@ public class UERepository
                 return Users[i];
             }
         }
-        throw new KeyNotFoundException("User not found");
+        return null;
     }
 
-    public Equipment GetEquipment(int id)
+    public Equipment? GetEquipment(int id)
     {
         for (int i = 0; i < Equipments.Count; i++)
         {
@@ -37,6 +37,6 @@ public class UERepository
                 return Equipments[i];
             }
         }
-        throw new KeyNotFoundException("Equipment not found");
+        return null;
     }
 }

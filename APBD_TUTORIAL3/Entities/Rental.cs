@@ -2,6 +2,8 @@
 
 public class Rental
 {
+    
+    
     //properties
     public User User {get; set;}
     public Equipment Equipment {get; set;}
@@ -14,7 +16,7 @@ public class Rental
     public TimeSpan RentedFor => ReturnDate.HasValue ? ReturnDate.Value - StartDate : DateTime.Now - StartDate;
     
     //constructor 
-    public Rental(User user, Equipment equipment, DateTime dueDate)
+    public Rental( User user, Equipment equipment, DateTime dueDate)
     {
         this.User = user;
         this.Equipment = equipment;

@@ -13,16 +13,17 @@ public class RentalService: IEquipmentService, IUserService, IRentalService
         this.UERepository = UERepository;
     }
     
-    public Rental GetRental(int userId, int equipmentId)
+    public Rental? GetRental( int userId, int equipmentId, DateTime dueDate)
     {
         foreach (var rental in Rentals)
         {
-            if (rental.User.UserId == userId && rental.Equipment.Id == equipmentId)
+            if (rental.User.UserId == userId && rental.Equipment.Id == equipmentId && rental.DueDate == dueDate)
             {
                 return rental;
             }
         }
-        throw new Exception("No rental found");
+        Console.WriteLine("No rental found");
+        return null;
     }
     
     //IEquipmentService
@@ -71,16 +72,26 @@ public class RentalService: IEquipmentService, IUserService, IRentalService
     
     public void RentEquipment(int userId, int equipmentId, DateTime DueDate)
     {   
-        User user = UERepository.GetUser(userId);
-        if (user.Type == UserType.Student && GetActiveRentalsByUser(userId).Count >= 2)
+        
+        if (UERepository.GetUser(userId) == null)
         {
-            Console.WriteLine($"Student {user.FirstName} {user.LastName} cannot rent more than 2 equipments");
+            Console.WriteLine("No such user, operation cancelled");
             return;
         }
-        else if (user.Type == UserType.Teacher && GetActiveRentalsByUser(userId).Count >= 5)
+        User user = UERepository.GetUser(userId);
+        if (user.Type == UserType.Student && GetActiveRentalsByUser(userId).Count >= Student.MaxNumberOfEquipment)
         {
-            Console.WriteLine($"Teacher {user.FirstName} {user.LastName} cannot rent more than 5 equipments");
+            Console.WriteLine($"Student {user.FirstName} {user.LastName} cannot rent more than {Student.MaxNumberOfEquipment} equipments");
             return;
+        }
+        else if (user.Type == UserType.Teacher && GetActiveRentalsByUser(userId).Count >= Teacher.MaxNumberOfEquipment)
+        {
+            Console.WriteLine($"Teacher {user.FirstName} {user.LastName} cannot rent more than {Teacher.MaxNumberOfEquipment} equipments");
+            return;
+        }
+        if (UERepository.GetEquipment(equipmentId) == null)
+        {
+            Console.WriteLine("No such equipment, operation cancelled");
         }
         Equipment equipment = UERepository.GetEquipment(equipmentId);
         if (!equipment.IsAvailable)
@@ -93,9 +104,20 @@ public class RentalService: IEquipmentService, IUserService, IRentalService
         equipment.IsAvailable = false;
     }
 
-    public void ReturnEquipment(int userId, int equipmentId, DateTime? returnDate = null)
+    public void ReturnEquipment(int userId, int equipmentId, DateTime dueDate, DateTime? returnDate = null)
     {
-        Rental rental = GetRental(userId, equipmentId);
+        
+        if (GetRental(userId, equipmentId, dueDate) == null)
+        {
+            Console.WriteLine("No such rental found, operation cancelled");
+            return;
+        }
+        Rental rental = GetRental(userId, equipmentId, dueDate);
+        if (!rental.IsActive)
+        {
+            Console.WriteLine($"Rental of {rental.Equipment.Name} by {rental.User.FirstName} {rental.User.LastName} has been already finished on {rental.ReturnDate}");
+            return;
+        }
         if (returnDate != null)
         {   
             rental.Return(returnDate.Value);
@@ -104,7 +126,6 @@ public class RentalService: IEquipmentService, IUserService, IRentalService
         }
         else
         {   
-            
             rental.Return();
             Console.WriteLine(rental);
             rental.Equipment.IsAvailable = true;

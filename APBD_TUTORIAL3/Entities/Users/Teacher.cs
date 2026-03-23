@@ -6,6 +6,7 @@ public class Teacher : User
     //field
     private double _popularityRating;
     //properties
+    public static int MaxNumberOfEquipment { get; set; } = 5;
     public double PopularityRating 
     {
         get {return _popularityRating;}
