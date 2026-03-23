@@ -97,12 +97,17 @@ public class RentalService: IEquipmentService, IUserService, IRentalService
     {
         Rental rental = GetRental(userId, equipmentId);
         if (returnDate != null)
-        {
+        {   
             rental.Return(returnDate.Value);
+            Console.WriteLine(rental);
+            rental.Equipment.IsAvailable = true;
         }
         else
-        {
+        {   
+            
             rental.Return();
+            Console.WriteLine(rental);
+            rental.Equipment.IsAvailable = true;
         }
     }
     
@@ -120,4 +125,8 @@ public class RentalService: IEquipmentService, IUserService, IRentalService
         return rentals;
     }
     
+    public void MarkEquipmentAsUnavailable(int equipmentId)
+    {
+        UERepository.GetEquipment(equipmentId).MarkEquipmentAsUnavailable();
+    }
 }

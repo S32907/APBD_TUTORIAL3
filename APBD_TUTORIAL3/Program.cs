@@ -15,5 +15,10 @@ rentalService.AddUser(new Teacher(102, "ALex", "Brown", 4.5));
 rentalService.RentEquipment(32907,1, new DateTime(2026,03,24));
 rentalService.RentEquipment(32907,2, new DateTime(2026,03,24));
 rentalService.RentEquipment(32907,3, new DateTime(2026,03,24));
+//MakeEquipment unavailable
+rentalService.MarkEquipmentAsUnavailable(3);
 consoleReporter.GenerateShortSummary();
-consoleReporter.DisplayAvailableEquipment();
+//returning
+rentalService.ReturnEquipment(32907,1);
+rentalService.ReturnEquipment(32907,2, new DateTime(2026,03,25));
+consoleReporter.GenerateShortSummary();
