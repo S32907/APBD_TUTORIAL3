@@ -1,6 +1,6 @@
 ﻿namespace APBD_TUTORIAL3.Entities;
 
-public abstract class Equipment
+public abstract class Equipment: IEquipmentUnavailable
 {
     //fields
     private static int _id = 0;
@@ -24,5 +24,10 @@ public abstract class Equipment
     public override string ToString()
     {
         return $" Id - {Id} \n Name - {Name} \n IsAvailable - {IsAvailable} \n Description - {Description} \n";
+    }
+
+    public void MarkEquipmentAsUnavailable()
+    {
+        IsAvailable = false;
     }
 }

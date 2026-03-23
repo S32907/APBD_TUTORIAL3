@@ -4,16 +4,16 @@ using APBD_TUTORIAL3.Enums;
 public abstract class User
 {
     //properties
-    public string Identifier {get; set;}
+    public int UserId {get; set;}
     public string FirstName { get; set; } 
     public string LastName { get; set; }
     public UserType Type { get; set; }
     
     //constructor
-    public User(string identifier, string firstName,
+    public User(int userId, string firstName,
         string lastName, UserType type)
     {
-        Identifier = identifier;
+        UserId = userId;
         FirstName = firstName;
         LastName = lastName;
         Type = type;
@@ -22,6 +22,6 @@ public abstract class User
     //methods
     public override string ToString()
     {
-        return $" Identifier - {Identifier} \n Name and surname - {FirstName} {LastName} \n Type - {Type} \n";
+        return $" Identifier - {UserId} \n Name and surname - {FirstName} {LastName} \n Type - {Type} \n";
     }
 }

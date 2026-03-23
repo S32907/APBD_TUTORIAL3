@@ -40,4 +40,17 @@ public class Rental
         else if (DueDate < DateTime.Now) { return 200; }
         else { return 0; }
     }
+
+    public override string ToString()
+    {
+        if (IsActive == false)
+        {
+            return $"User - {User.FirstName} {User.LastName} rented {Equipment.Name} on {StartDate} to {DueDate} \n returned at {ReturnDate}, Fee - {CalculateFee()}";
+        }
+        else
+        {
+            return $"User - {User.FirstName} {User.LastName} rented {Equipment.Name} on {StartDate} to {DueDate} \n not returned yet";
+        }
+    }
+        
 }

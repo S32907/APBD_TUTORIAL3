@@ -20,8 +20,8 @@ public class Teacher : User
     }
     
     //constructor
-    public Teacher(string identifier, string firstName,
-        string lastName, double popularityRating) : base(identifier, firstName, lastName, UserType.Teacher)
+    public Teacher(int userId, string firstName,
+        string lastName, double popularityRating) : base(userId, firstName, lastName, UserType.Teacher)
     {
         PopularityRating = popularityRating;
     }

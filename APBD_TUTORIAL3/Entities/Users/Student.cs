@@ -6,8 +6,8 @@ public class Student: User
     public int YearOfStudy {get; set;}
     
     //constructor
-    public Student(string identifier, string firstName,
-        string lastName, int yearOfStudy) : base(identifier, firstName, lastName, UserType.Student )
+    public Student(int userId, string firstName,
+        string lastName, int yearOfStudy) : base(userId, firstName, lastName, UserType.Student )
     {
         YearOfStudy = yearOfStudy;
     }
