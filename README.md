@@ -1,3 +1,10 @@
+How to run this project: 
+to run this project we need to do the following in main create UERepository pass it as parametr to RentalService constructor, pass rentalService as a
+parametr to ConsoleReporter constructor. After that we can accses full functionality of the project via instance of rentalService or ConsoleReporter.
+Possible methods can be seen in corresponding interfaces.
+
+
+Description
 This project creates a rental environment for university, it can be used by students and teachers, it supports 3 equipments types.
 I tried to design this project of Rentals service so it is readable, each class has its own goal, it is easily modifiable without much hardcoding.
 I divided main parts of the projects in directories:
